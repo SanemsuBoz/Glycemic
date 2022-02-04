@@ -5,12 +5,14 @@ import com.works.glycemic.models.User;
 import com.works.glycemic.repositories.RoleRepository;
 import com.works.glycemic.repositories.UserRepository;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,8 +64,27 @@ public class UserService extends SimpleUrlLogoutSuccessHandler implements UserDe
         return authorities;
     }
 
+    public User register( User us ) throws AuthenticationException {
+
+        Optional<User> uOpt = uRepo.findByEmailEqualsIgnoreCase(us.getEmail());
+        if ( uOpt.isPresent() ) {
+            return null;
+        }
+        us.setPassword( encoder().encode( us.getPassword() ) );
+
+        return uRepo.save(us);
+    }
+
+
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         super.onLogoutSuccess(request, response, authentication);
+
     }
 }
