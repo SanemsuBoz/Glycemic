@@ -63,5 +63,48 @@ public class FoodsRestController {
         return hm;
     }
 
+    @DeleteMapping("/userFoodDelete/{gid}")
+    public Map<REnum,Object> userFoodDelete(@PathVariable Long gid){
+        Map<REnum,Object> hm=new LinkedHashMap<>();
+        String result=foodService.userFoodDelete(gid);
+        if (result==""){
+            hm.put(REnum.status,true);
+            hm.put(REnum.message,"Bu İşlem İçin Yetkiniz Bulunmamaktadır!");
+            hm.put(REnum.result,foodService.foodList());
+        }else if (result=="Silmek İstediğiniz Ürün Bulunamadı!"){
+            hm.put(REnum.status,true);
+            hm.put(REnum.message,result);
+            hm.put(REnum.result,foodService.userFoodList());
+        }else {
+            hm.put(REnum.status,true);
+            hm.put(REnum.message,"Ürün Silindi");
+            hm.put(REnum.result,foodService.userFoodList());
+        }
+
+        return hm;
+    }
+
+    @PutMapping("/userFoodUpdate")
+    public Map<REnum,Object> userFoodUpdate(@RequestBody Foods foods){
+        Map<REnum,Object> hm=new LinkedHashMap<>();
+
+        String result=foodService.userFoodUpdate(foods);
+        if (result==""){
+            hm.put(REnum.status,true);
+            hm.put(REnum.message,"Bu İşlem İçin Yetkiniz Bulunmamaktadır!");
+            hm.put(REnum.result,foodService.foodList());
+        }else if (result=="Düzenlemek İstediğiniz Ürün Bulunamadı!"){
+            hm.put(REnum.status,true);
+            hm.put(REnum.message,result);
+            hm.put(REnum.result,foodService.userFoodList());
+        }else {
+            hm.put(REnum.status,true);
+            hm.put(REnum.message,"Değişiklikler Kaydedildi");
+            hm.put(REnum.result,foodService.userFoodList());
+        }
+
+        return hm;
+    }
+
 
 }
