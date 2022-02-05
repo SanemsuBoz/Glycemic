@@ -52,6 +52,7 @@ public class UserService extends SimpleUrlLogoutSuccessHandler implements UserDe
                     true,
                     getAuthorities(u.getRoles())
             );
+            return  userDetails;
         }
         throw  new UsernameNotFoundException("User name not found!");
     }
@@ -86,5 +87,49 @@ public class UserService extends SimpleUrlLogoutSuccessHandler implements UserDe
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         super.onLogoutSuccess(request, response, authentication);
 
+    }
+
+    //user register service
+    public User userRegisterService(User user){
+
+        //user control
+        Optional<User> optionalUser=uRepo.findByEmailEqualsIgnoreCase(user.getEmail());
+        if (optionalUser.isPresent()){
+            return null;
+        }else{
+            //register action
+            Optional<Role> oRole=rRepo.findById(1L);
+            if (oRole.isPresent()){
+                //register
+                List<Role> roles=new ArrayList<>();
+                Role r=oRole.get();
+                roles.add(r);
+                user.setRoles(roles);
+                //email send-> enabled false
+                return register(user);
+            }
+
+        }
+        return null;
+    }
+
+    public User adminRegisterService(User user){
+
+        //user control
+        Optional<User> optionalUser=uRepo.findByEmailEqualsIgnoreCase(user.getEmail());
+        if (optionalUser.isPresent()){
+            return null;
+        }else{
+            //register action
+            Optional<Role> oRole=rRepo.findById(1L);
+            if (oRole.isPresent()){
+                //register
+                user.setRoles(rRepo.findAll());
+                //email send-> enabled false
+                return register(user);
+            }
+
+        }
+        return null;
     }
 }

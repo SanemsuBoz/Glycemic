@@ -24,18 +24,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // hangi yöntemle giriş yapılarak, rollere göre hangi servis kullanılcak?
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       /* http
-                .httpBasic()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/customer/**").hasRole("USER")
-                .antMatchers("/news/**").hasRole("ADMIN")
-                .antMatchers("/admin/**").permitAll()
-                .and()
-                .csrf().disable()
-                .formLogin().disable()
-                .logout().logoutUrl("/admin/logout").invalidateHttpSession(true) ;
-        http.headers().frameOptions().disable(); // h2-console for using
-       */
+      http
+              .httpBasic()
+              .and()
+              .authorizeHttpRequests()
+              .antMatchers("/foods/save").hasRole("user")
+              .antMatchers("/foods/userFoodList").hasAnyRole("user","admin")
+              .antMatchers("/foods/list").hasAnyRole("user","global","admin")
+              .antMatchers("/register/**").permitAll()
+              .and()
+              .csrf().disable()
+              .formLogin().disable()
+              .logout().logoutUrl("/logout").invalidateHttpSession(true);
+
     }
 }
