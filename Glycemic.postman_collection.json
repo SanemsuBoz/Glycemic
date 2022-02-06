@@ -1,1 +1,192 @@
-{"info":{"_postman_id":"8de44d0a-3c4e-40eb-bd43-bb7fe7552a3e","name":"Glycemic","schema":"https://schema.getpostman.com/json/collection/v2.0.0/collection.json"},"item":[{"name":"Register","item":[{"name":"User Register","id":"cdd55f88-7f2b-41a6-9db1-0cfe833cc08f","request":{"method":"POST","header":[],"body":{"mode":"raw","raw":"{\r\n    \"name\":\"glo\",\r\n    \"surname\":\"su\",\r\n    \"cityid\":1,\r\n    \"mobile\":\"5465161\",\r\n    \"email\":\"glo@mail.com\",\r\n    \"password\":\"12345\",\r\n    \"enabled\":true,\r\n    \"tokenExpired\":true,\r\n    \"roles\":[\r\n        {\"rid\":0, \"name\":\"role_global\"}\r\n    ]\r\n}","options":{"raw":{"language":"json"}}},"url":"{{base_url}}register/userRegister"},"response":[]},{"name":"Admin Register","id":"4d2df238-13c0-4f3a-9ad2-663b0593a6e4","request":{"method":"POST","header":[],"body":{"mode":"raw","raw":"{\r\n    \"name\":\"gly\",\r\n    \"surname\":\"cemic\",\r\n    \"cityid\":1,\r\n    \"mobile\":\"05469872154\",\r\n    \"email\":\"admin1@mail.com\",\r\n    \"password\":\"12345\",\r\n    \"enabled\":true,\r\n    \"tokenExpired\":true,\r\n    \"roles\":[\r\n        {\"rid\":2, \"name\":\"role_admin\"}\r\n    ]\r\n}","options":{"raw":{"language":"json"}}},"url":"{{base_url}}register/adminRegister"},"response":[]}],"id":"655d174b-dc07-45a7-960b-a52269fe629a"},{"name":"Foods","item":[{"name":"Food Save","id":"7949540b-2d91-4bff-887b-6196c171bfa3","request":{"auth":{"type":"basic","basic":{"username":"admin1@mail.com","password":"12345","showPassword":false}},"method":"POST","header":[],"body":{"mode":"raw","raw":"{\r\n    \"cid\":14,\r\n    \"name\":\"Karpuz\",\r\n    \"glycemicindex\":72,\r\n    \"image\":\"base64\",\r\n    \"source\":\"source.pdf\",\r\n    \"enabled\":false\r\n}","options":{"raw":{"language":"json"}}},"url":"{{base_url}}foods/save"},"response":[]},{"name":"Food List","id":"b2f2df56-907f-4480-84e2-37aa94b3437b","request":{"auth":{"type":"basic","basic":{"username":"susu@mail.com","password":"12345","showPassword":false}},"method":"GET","header":[],"url":"{{base_url}}foods/list"},"response":[]},{"name":"User Food List","id":"0cccd276-07c5-45bd-b552-81d13f3adab5","request":{"auth":{"type":"basic","basic":{"username":"admin1@mail.com","password":"12345","showPassword":false}},"method":"GET","header":[],"url":"{{base_url}}foods/userFoodList"},"response":[]},{"name":"User Delete Food","id":"dac655be-4cbc-433f-89a5-5a296bc2a944","request":{"auth":{"type":"basic","basic":{"username":"susu@mail.com","password":"12345","showPassword":false}},"method":"DELETE","header":[],"url":"{{base_url}}foods/userFoodDelete/6"},"response":[]},{"name":"User Update Food","id":"b4a25de4-3b21-4dd9-a7b4-502d4289c586","request":{"auth":{"type":"basic","basic":{"username":"susu@mail.com","password":"12345","showPassword":false}},"method":"PUT","header":[],"body":{"mode":"raw","raw":"{\r\n    \"cid\":11,\r\n    \"name\":\"Şeftali\",\r\n    \"glycemicindex\":72,\r\n    \"image\":\"base64\",\r\n    \"source\":\"source.pdf\",\r\n    \"enabled\":false\r\n}"},"url":"{{base_url}}foods/userFoodUpdate"},"response":[]}],"id":"42dae7ff-392e-462a-9e9c-f65dbf430e0c"}],"event":[{"listen":"prerequest","script":{"id":"4b14b651-d245-411b-a79e-9879cba5f6fe","type":"text/javascript","exec":[""]}},{"listen":"test","script":{"id":"26eb57ec-dd81-4600-aaaa-f31335e5c848","type":"text/javascript","exec":[""]}}],"variable":[{"id":"0e275be6-0581-4440-957c-fbf10b531372","key":"base_url","value":"localhost:8080/","type":"string"}]}
+{
+"info": {
+"_postman_id": "8de44d0a-3c4e-40eb-bd43-bb7fe7552a3e",
+"name": "Glycemic",
+"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+},
+"item": [
+{
+"name": "Register",
+"item": [
+{
+"name": "User Register",
+"id": "cdd55f88-7f2b-41a6-9db1-0cfe833cc08f",
+"request": {
+"method": "POST",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\r\n    \"name\":\"glo\",\r\n    \"surname\":\"su\",\r\n    \"cityid\":1,\r\n    \"mobile\":\"5465161\",\r\n    \"email\":\"glo@mail.com\",\r\n    \"password\":\"12345\",\r\n    \"enabled\":true,\r\n    \"tokenExpired\":true,\r\n    \"roles\":[\r\n        {\"rid\":0, \"name\":\"role_global\"}\r\n    ]\r\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": "{{base_url}}register/userRegister"
+},
+"response": []
+},
+{
+"name": "Admin Register",
+"id": "4d2df238-13c0-4f3a-9ad2-663b0593a6e4",
+"request": {
+"method": "POST",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\r\n    \"name\":\"gly\",\r\n    \"surname\":\"cemic\",\r\n    \"cityid\":1,\r\n    \"mobile\":\"05469872154\",\r\n    \"email\":\"admin1@mail.com\",\r\n    \"password\":\"12345\",\r\n    \"enabled\":true,\r\n    \"tokenExpired\":true,\r\n    \"roles\":[\r\n        {\"rid\":2, \"name\":\"role_admin\"}\r\n    ]\r\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": "{{base_url}}register/adminRegister"
+},
+"response": []
+}
+],
+"id": "655d174b-dc07-45a7-960b-a52269fe629a"
+},
+{
+"name": "Foods",
+"item": [
+{
+"name": "Food Save",
+"id": "7949540b-2d91-4bff-887b-6196c171bfa3",
+"request": {
+"auth": {
+"type": "basic",
+"basic": {
+"username": "admin1@mail.com",
+"password": "12345",
+"showPassword": false
+}
+},
+"method": "POST",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\r\n    \"cid\":14,\r\n    \"name\":\"Karpuz\",\r\n    \"glycemicindex\":72,\r\n    \"image\":\"base64\",\r\n    \"source\":\"source.pdf\",\r\n    \"enabled\":false\r\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": "{{base_url}}foods/save"
+},
+"response": []
+},
+{
+"name": "Food List",
+"id": "b2f2df56-907f-4480-84e2-37aa94b3437b",
+"request": {
+"auth": {
+"type": "basic",
+"basic": {
+"username": "susu@mail.com",
+"password": "12345",
+"showPassword": false
+}
+},
+"method": "GET",
+"header": [],
+"url": "{{base_url}}foods/list"
+},
+"response": []
+},
+{
+"name": "User Food List",
+"id": "0cccd276-07c5-45bd-b552-81d13f3adab5",
+"request": {
+"auth": {
+"type": "basic",
+"basic": {
+"username": "admin1@mail.com",
+"password": "12345",
+"showPassword": false
+}
+},
+"method": "GET",
+"header": [],
+"url": "{{base_url}}foods/userFoodList"
+},
+"response": []
+},
+{
+"name": "User Delete Food",
+"id": "dac655be-4cbc-433f-89a5-5a296bc2a944",
+"request": {
+"auth": {
+"type": "basic",
+"basic": {
+"username": "susu@mail.com",
+"password": "12345",
+"showPassword": false
+}
+},
+"method": "DELETE",
+"header": [],
+"url": "{{base_url}}foods/userFoodDelete/6"
+},
+"response": []
+},
+{
+"name": "User Update Food",
+"id": "b4a25de4-3b21-4dd9-a7b4-502d4289c586",
+"request": {
+"auth": {
+"type": "basic",
+"basic": {
+"username": "susu@mail.com",
+"password": "12345",
+"showPassword": false
+}
+},
+"method": "PUT",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\r\n    \"cid\":11,\r\n    \"name\":\"Şeftali\",\r\n    \"glycemicindex\":72,\r\n    \"image\":\"base64\",\r\n    \"source\":\"source.pdf\",\r\n    \"enabled\":false\r\n}"
+},
+"url": "{{base_url}}foods/userFoodUpdate"
+},
+"response": []
+}
+],
+"id": "42dae7ff-392e-462a-9e9c-f65dbf430e0c"
+}
+],
+"event": [
+{
+"listen": "prerequest",
+"script": {
+"id": "4b14b651-d245-411b-a79e-9879cba5f6fe",
+"type": "text/javascript",
+"exec": [
+""
+]
+}
+},
+{
+"listen": "test",
+"script": {
+"id": "26eb57ec-dd81-4600-aaaa-f31335e5c848",
+"type": "text/javascript",
+"exec": [
+""
+]
+}
+}
+],
+"variable": [
+{
+"id": "0e275be6-0581-4440-957c-fbf10b531372",
+"key": "base_url",
+"value": "localhost:8080/",
+"type": "string"
+}
+]
+}
