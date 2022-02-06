@@ -12,7 +12,7 @@ public interface FoodRepository extends JpaRepository<Foods,Long> {
 
     List<Foods> findByCreatedByEqualsIgnoreCase(String createdBy);
 
-    Optional<Foods> findByGidEquals(Long gid);
+    Optional<Foods> findByCreatedByEqualsIgnoreCaseAndGidEquals(String createdBy, Long gid);
 
 
 }
