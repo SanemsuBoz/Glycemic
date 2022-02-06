@@ -24,7 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // hangi yöntemle giriş yapılarak, rollere göre hangi servis kullanılcak?
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      http
+        http.cors().and();
+        http
+              //.cors().and()
               .httpBasic()
               .and()
               .authorizeHttpRequests()
