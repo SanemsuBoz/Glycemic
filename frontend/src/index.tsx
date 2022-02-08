@@ -10,6 +10,7 @@ import ControlView from './ControlView';
 
 // import pages
 import Home from './Home'
+import FoodDetails from './FoodDetails';
 
 // Router
 const router = 

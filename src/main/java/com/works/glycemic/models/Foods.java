@@ -30,5 +30,7 @@ public class Foods extends BaseModel{
 
     private boolean enabled;
 
+    private String url;
+
 
 }

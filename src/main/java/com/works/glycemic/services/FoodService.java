@@ -27,8 +27,38 @@ public class FoodService {
             return null;
         }else {
             foods.setEnabled(false);
+            foods.setName(foodNameCheck(foods.getName()));
+            foods.setUrl(urlCheck(foods.getName()));
             return fRepo.save(foods);
         }
+    }
+
+    public String foodNameCheck(String foodName){
+        char c = Character . toUpperCase ( foodName . charAt ( 0 ));
+        foodName = c + foodName . substring ( 1 );
+        String bosluk=" ";
+        for (int i = 1 ; i<foodName.length();i++)
+        {
+            if (foodName.charAt(i)==' ')
+            {
+                c=Character.toUpperCase(foodName.charAt (i+1));
+                foodName = foodName.substring(0,i)+bosluk +c  + foodName.substring(i+2);
+            }
+
+        }
+        foodName=foodName.trim().replaceAll(" +", " ");
+        return foodName;
+    }
+
+    public String urlCheck(String urlName){
+        urlName=urlName.toLowerCase();
+        urlName=urlName.replaceAll("ü","u");
+        urlName=urlName.replaceAll("ğ","g");
+        urlName=urlName.replaceAll("ş","s");
+        urlName=urlName.replaceAll("ç","c");
+        urlName=urlName.replaceAll("ö","o");
+        urlName=urlName.replaceAll(" ","-");
+        return urlName;
     }
 
     //food list
