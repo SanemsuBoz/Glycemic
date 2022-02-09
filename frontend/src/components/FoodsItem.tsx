@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Image, Button, Grid, Label, Icon ,Dimmer, Header, Segment} from 'semantic-ui-react';
+import { Card, Image, Button, Grid, Label, Icon, Dimmer, Header, Segment } from 'semantic-ui-react';
 import { SemanticCOLORS } from 'semantic-ui-react/dist/commonjs/generic';
 import FoodDetails from '../FoodDetails';
 import { ResultFoods } from '../models/IFoods';
@@ -38,25 +38,34 @@ export default function FoodsItem(props: itemType) {
     }
 
     //go to detail
-    const fncGotoDetail=(url:string)=>{
-        
-        navigate("/detail/"+url)
-    
+    const fncGotoDetail = (url: string) => {
+
+        navigate("/detail/" + url)
+
     }
 
 
     return (
         <>
             <Grid.Column mobile={8} tablet={8} computer={4}>
-                <Card>
+                <Card fluid>
                     <Card.Content>
-                        <Image
+                        {props.item.image !== "" &&
+                            <Image
+                                floated='right'
+                                size='tiny'
+                                src={props.item.image}
+                            />
+                        }
+                        {props.item.image === "" &&
+                            <Image
                             floated='right'
                             size='tiny'
-                            src={props.item.image}
+                            src='./foods.png'
                         />
+                        }
                         <Card.Header>{props.item.name}</Card.Header>
-                        <Label size='big' circular style={{marginTop:10,}} color={glycemicColor(props.item.glycemicindex!)}>{props.item.glycemicindex!}</Label>
+                        <Label size='big' circular style={{ marginTop: 10, }} color={glycemicColor(props.item.glycemicindex!)}>{props.item.glycemicindex!}</Label>
                         <Card.Description>
                             <Card.Meta>{props.item.createdBy === null ? 'user@mail.com' : props.item.createdBy}</Card.Meta>
                             <Card.Meta>{fncDateConvert(props.item.createdDate!)}</Card.Meta>
@@ -64,11 +73,11 @@ export default function FoodsItem(props: itemType) {
                     </Card.Content>
                     <Card.Content extra>
                         <div className='ui two buttons'>
-                            <Button basic color='green' onClick={()=>fncGotoDetail(props.item.url!)}>
-                            <Icon name='info'/>Detay
+                            <Button basic color='green' onClick={() => fncGotoDetail(props.item.url!)}>
+                                <Icon name='info' />Detay
                             </Button>
                             <Button basic color='red'>
-                                <Icon name='food'/>Ekle
+                                <Icon name='food' />Ekle
                             </Button>
                         </div>
                     </Card.Content>

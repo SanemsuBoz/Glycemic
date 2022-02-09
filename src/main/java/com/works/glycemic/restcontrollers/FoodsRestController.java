@@ -3,10 +3,12 @@ package com.works.glycemic.restcontrollers;
 import com.works.glycemic.models.Foods;
 import com.works.glycemic.services.FoodService;
 import com.works.glycemic.utils.REnum;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -40,6 +42,7 @@ public class FoodsRestController {
     }
 
     //foods list
+    @Cacheable("foods_list")
     @GetMapping("/list")
     public Map<REnum,Object> list(){
         Map<REnum,Object> hm=new LinkedHashMap<>();
@@ -74,5 +77,20 @@ public class FoodsRestController {
         return foodService.userUpdateFood(foods);
     }
 
+    @GetMapping("/detail/{url}")
+    public Map<REnum,Object> detailFood(@PathVariable String url){
+        Map<REnum,Object> hm=new LinkedHashMap<>();
+        Optional<Foods> optionalFoods=foodService.detailFoods(url);
+        if (optionalFoods.isPresent()){
+            hm.put(REnum.status,true);
+            hm.put(REnum.message,"Ürün Detayı");
+            hm.put(REnum.result,optionalFoods);
+        }else {
+            hm.put(REnum.status,false);
+            hm.put(REnum.message,"Hata Oluştu");
+            hm.put(REnum.result,null);
+        }
+        return hm;
+    }
 
 }

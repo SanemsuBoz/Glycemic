@@ -4,6 +4,7 @@ import com.works.glycemic.config.AuditAwareConfig;
 import com.works.glycemic.models.Foods;
 import com.works.glycemic.repositories.FoodRepository;
 import com.works.glycemic.utils.REnum;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,10 +14,12 @@ public class FoodService {
 
     final FoodRepository fRepo;
     final AuditAwareConfig auditAwareConfig;
+    final CacheManager cacheManager;
 
-    public FoodService(FoodRepository fRepo, AuditAwareConfig auditAwareConfig) {
+    public FoodService(FoodRepository fRepo, AuditAwareConfig auditAwareConfig, CacheManager cacheManager) {
         this.fRepo = fRepo;
         this.auditAwareConfig = auditAwareConfig;
+        this.cacheManager = cacheManager;
     }
 
     //food save
@@ -59,6 +62,10 @@ public class FoodService {
         urlName=urlName.replaceAll("ö","o");
         urlName=urlName.replaceAll(" ","-");
         return urlName;
+    }
+
+    public Optional<Foods> detailFoods(String url){
+        return fRepo.findByUrlEqualsIgnoreCase(url);
     }
 
     //food list
@@ -122,12 +129,16 @@ public class FoodService {
                 //admin food update
                 if (auditAwareConfig.roles().contains("ROLE_admin")) {
                     userFood.setCid(food.getCid());
-                    userFood.setName(food.getName());
+                    userFood.setName(foodNameCheck(food.getName()));
                     userFood.setGlycemicindex(food.getGlycemicindex());
                     userFood.setImage(food.getImage());
                     userFood.setSource(food.getSource());
                     userFood.setEnabled(food.isEnabled());
-                    hm.put(REnum.result, fRepo.save(userFood));
+                    if (food.isEnabled()){
+                        cacheManager.getCache("foods_list").clear();
+                    }
+                    userFood.setUrl(urlCheck(food.getName()));
+                    hm.put(REnum.result, fRepo.saveAndFlush(userFood));
                 }
                 else {
                     //user food update
@@ -138,7 +149,7 @@ public class FoodService {
                         userFood.setGlycemicindex(food.getGlycemicindex());
                         userFood.setImage(food.getImage());
                         userFood.setSource(food.getSource());
-                        hm.put(REnum.result, fRepo.save(userFood));
+                        hm.put(REnum.result, fRepo.saveAndFlush(userFood));
                     }
                     else {
                         hm.put(REnum.status, false);
