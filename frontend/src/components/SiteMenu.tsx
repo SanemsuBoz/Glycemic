@@ -219,16 +219,19 @@ export default function SiteMenu() {
         </Menu.Item>
         <Menu.Item
           content='Anasayfa'
+          name='Anasayfa'
           active={activeItem === 'Anasayfa'}
           onClick={(e, data) => handleItemClick(data.name!)}
         />
         <Menu.Item
           content='Gıda Ekle'
+          name='Gıda Ekle'
           active={activeItem === 'Gıda Ekle'}
           onClick={(e, data) => handleItemClick(data.name!)}
         />
         <Menu.Item
           content='Eklediklerim'
+          name='Eklediklerim'
           active={activeItem === 'Eklediklerim'}
           onClick={(e, data) => handleItemClick(data.name!)}
         />
@@ -236,6 +239,7 @@ export default function SiteMenu() {
         {isAdmin === true &&
           <Menu.Item
             content='Bekleyenler'
+            name='Bekleyenler'
             active={activeItem === 'Bekleyenler'}
             onClick={(e, data) => handleItemClick(data.name!)}
           />
