@@ -14,12 +14,12 @@ It is a web page where you can find the glycemic values of foods and add new val
 
 ## Images
 
-<img src="" alt="Admin Home Page">
+<img src="https://github.com/SanemsuBoz/Glycemic/blob/master/image/admin.PNG" alt="Admin Home Page">
 
-<img src="" alt="Admin Confirmation Page">
+<img src="https://github.com/SanemsuBoz/Glycemic/blob/master/image/adminbekleyen.PNG" alt="Admin Confirmation Page">
 
-<img src="" alt="Home Page">
+<img src="https://github.com/SanemsuBoz/Glycemic/blob/master/image/user.PNG" alt="Home Page">
 
-<img src="" alt="Add Food Page">
+<img src="https://github.com/SanemsuBoz/Glycemic/blob/master/image/ekle.PNG" alt="Add Food Page">
 
-<img src="" alt="User Added Food Page">
+<img src="https://github.com/SanemsuBoz/Glycemic/blob/master/image/usereklenen.PNG" alt="User Added Food Page">
