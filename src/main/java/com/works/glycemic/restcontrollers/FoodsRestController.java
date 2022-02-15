@@ -67,6 +67,16 @@ public class FoodsRestController {
         return hm;
     }
 
+    // foods List
+    @GetMapping("/adminWaitFoodList")
+    public Map<REnum, Object> adminWaitFoodList() {
+        Map<REnum, Object> hm = new LinkedHashMap<>();
+        hm.put(REnum.status, true);
+        hm.put(REnum.message, "Ürün Listesi");
+        hm.put(REnum.result, foodService.adminWaitFoodList());
+        return hm;
+    }
+
     @DeleteMapping("/userFoodDelete")
     public Map<REnum,Object> userFoodDelete(@RequestParam Long gid){
         return foodService.userFoodDelete(gid);

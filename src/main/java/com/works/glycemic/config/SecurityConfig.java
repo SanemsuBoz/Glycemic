@@ -26,20 +26,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-              .cors().and()
-              .httpBasic()
-              .and()
-              .authorizeHttpRequests()
-              .antMatchers("/foods/save").hasRole("user")
-              .antMatchers("/foods/userFoodList").hasAnyRole("user","admin")
-              .antMatchers("/foods/list","/foods/detail/**").hasAnyRole("user","global","admin")
-              .antMatchers("/foods/userFoodDelete").hasAnyRole("user","admin")
-              .antMatchers("/foods/userFoodUpdate").hasAnyRole("user","admin")
-              .antMatchers("/register/**").permitAll()
-              .and()
-              .csrf().disable()
-              .formLogin().disable()
-              .logout().logoutUrl("/logout").invalidateHttpSession(true);
+                .cors().and()
+                .httpBasic()
+                .and()
+                .authorizeHttpRequests()
+                .antMatchers("/foods/save","/foods/userFoodList","/foods/foodDelete","/foods/foodUpdate", "/register/login").hasAnyRole("user", "admin")
+                .antMatchers("/foods/adminWaitFoodList").hasRole("admin")
+                .antMatchers("/foods/list", "foods/detail/**").hasAnyRole("global","user", "admin")
+                .antMatchers("/register/userRegister", "/register/adminRegister").permitAll()
+                .and()
+                .csrf().disable()
+                .formLogin().disable()
+                .logout().logoutUrl("/logout").invalidateHttpSession(true);
 
     }
 }

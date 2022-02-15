@@ -5,18 +5,24 @@ import 'semantic-ui-css/semantic.min.css'
 import { BrowserRouter as Router, Routes ,Route } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 
-//Control class
-import ControlView from './ControlView';
+
 
 // import pages
 import Home from './Home'
 import FoodDetails from './FoodDetails';
+import FoodAdd from './FoodAdd';
+import UserFoodList from './UserFoodList';
+import AdminWaitFoodList from './AdminWaitFoodList';
 
 // Router
 const router = 
 <Router>
   <Routes>
     <Route path='/' element={ <Home /> } />
+    <Route path='/foodsAdd' element={ <FoodAdd /> } />
+    <Route path='/foodsList' element={ <UserFoodList /> } />
+    <Route path='/details/:url' element={ <FoodDetails/>} />
+    <Route path='/waitFoodsList' element={ <AdminWaitFoodList/> } />
   </Routes>
 </Router> 
 

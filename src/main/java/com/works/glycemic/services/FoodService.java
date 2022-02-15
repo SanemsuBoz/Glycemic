@@ -70,7 +70,12 @@ public class FoodService {
 
     //food list
     public List<Foods> foodList(){
-        return fRepo.findAll();
+        return fRepo.findByEnabledEqualsOrderByGidAsc(true);
+    }
+
+    // admin Wait food list
+    public List<Foods> adminWaitFoodList() {
+        return fRepo.findByEnabledEqualsOrderByGidAsc(false);
     }
 
     //user food list
@@ -167,5 +172,6 @@ public class FoodService {
         }
         return hm;
     }
+
 
 }

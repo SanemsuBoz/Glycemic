@@ -98,13 +98,15 @@ public class UserService extends SimpleUrlLogoutSuccessHandler implements UserDe
             return null;
         }else{
             //register action
-            Optional<Role> oRole=rRepo.findById(1L);
+            Optional<Role> oRole=rRepo.findById(2L);
             if (oRole.isPresent()){
                 //register
                 List<Role> roles=new ArrayList<>();
                 Role r=oRole.get();
                 roles.add(r);
                 user.setRoles(roles);
+                user.setEnabled(true);
+                user.setTokenExpired(true);
                 //email send-> enabled false
                 return register(user);
             }
@@ -129,6 +131,16 @@ public class UserService extends SimpleUrlLogoutSuccessHandler implements UserDe
                 return register(user);
             }
 
+        }
+        return null;
+    }
+
+    //login with sec
+    public User login(String email) {
+        Optional<User> optionalUser = uRepo.findByEmailEqualsIgnoreCase(email);
+        if (optionalUser.isPresent()) {
+            User user=optionalUser.get();
+            return user;
         }
         return null;
     }

@@ -23,7 +23,7 @@ public class Foods extends BaseModel{
 
     private Integer glycemicindex;
 
-    @Column(length = 10000)
+    @Column(length = 30000)
     private String image;
 
     private String source;

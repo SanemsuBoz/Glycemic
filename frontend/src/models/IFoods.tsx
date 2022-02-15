@@ -4,6 +4,12 @@ export interface IFoods {
     result?:  ResultFoods[];
 }
 
+export interface ISinglFoods {
+    status?:  boolean;
+    message?: string;
+    result?:  ResultFoods;
+}
+
 export interface ResultFoods {
     createdDate?:   number;
     modifiedDate?:  number;
