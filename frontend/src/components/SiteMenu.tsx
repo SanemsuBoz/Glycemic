@@ -144,6 +144,7 @@ export default function SiteMenu() {
   }
 
 
+
   // register fnc
   let regphone = /^[0]?[5]\d{9}$/;
   const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
@@ -316,7 +317,7 @@ export default function SiteMenu() {
 
 
       <Modal
-        size='tiny'
+        size='mini'
         open={modalLoginStatus}
         onClose={() => setModalLoginStatus(false)}
       >
@@ -349,7 +350,7 @@ export default function SiteMenu() {
       >
         <Modal.Header>Çıkış İşlemi</Modal.Header>
         <Modal.Content>
-          <p>Çıkmak istediğinizden emin misniz?</p>
+          <p>Çıkmak istediğinizden emin misiniz?</p>
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => setIsLogOut(false)}>
