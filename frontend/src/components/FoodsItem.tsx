@@ -1,10 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, Card, Grid, Icon, Image, Label, SemanticCOLORS } from 'semantic-ui-react';
+import { Button, Card, Grid, Icon, Image, Item, Label, SemanticCOLORS } from 'semantic-ui-react';
 import { categories } from '../Datas';
 import { ISinglFoods, ResultFoods } from '../models/IFoods';
 import { adminhFoodDelete, adminWaitPushFood } from '../Services';
-import { fncDateConvert } from '../Util';
+import { allDataBasket, basketAdd, fncDateConvert } from '../Util';
 
 interface itemType {
     item: ResultFoods,
@@ -14,7 +13,9 @@ interface itemType {
 
 export default function FoodsItem(props: itemType) {
 
-    const navigate = useNavigate()
+    const addBasket=()=>{
+        basketAdd(props.item)
+    }
 
     const glycemicColor = (index: number): SemanticCOLORS => {
         var color: SemanticCOLORS = 'red'
@@ -107,8 +108,10 @@ export default function FoodsItem(props: itemType) {
                                     <Icon name='info' />Detay
                                 </Button>
 
-                                <Button basic color='red'>
-                                    <Icon name='food' />Ekle
+                                <Button onClick={(e,data)=>addBasket()} basic color='red' animated='vertical'>
+                                    <Button.Content visible> <Icon name='food' />Ekle</Button.Content>
+                                    <Button.Content hidden> <Icon name='shop' />Ekle</Button.Content>
+                                   
                                 </Button>
                             </>
                         }

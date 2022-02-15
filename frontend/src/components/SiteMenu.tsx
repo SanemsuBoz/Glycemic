@@ -1,11 +1,12 @@
 import React, { FormEvent, useEffect, useState } from 'react'
-import { Menu, Button, Modal, Form, Icon, Segment, Label } from 'semantic-ui-react'
+import { Menu, Button, Modal, Form, Icon, Segment, Label, Sidebar, Header, Card, Feed, FeedContent } from 'semantic-ui-react'
 import { cities } from '../Datas';
 import { IUser, UserResult } from '../models/IUser';
 import { userAndAdminLogin, logout, userRegisterService } from '../Services';
 import { ToastContainer, toast } from 'react-toastify';
-import { control, encryptData } from '../Util'
+import { allDataBasket, control, deleteItemBasket, encryptData } from '../Util'
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ResultFoods } from '../models/IFoods';
 
 
 export default function SiteMenu() {
@@ -210,6 +211,18 @@ export default function SiteMenu() {
     })
   }
 
+  //basket action
+  const [basketCount, setBasketCount] = useState(0)
+  const [visible, setVisible] = useState(false)
+  const [basketItems, setBasketItems] = useState<ResultFoods[]>([])
+
+  useEffect(() => {
+    setBasketItems(allDataBasket())
+  }, [visible])
+
+  const deleteFnc = (index: number) => {
+    setBasketItems(deleteItemBasket(index))
+  }
 
   return (
     <>
@@ -277,7 +290,54 @@ export default function SiteMenu() {
               />
             </>}
 
+          <Menu.Item>
+            <Button animated='vertical' onClick={(e, d) => setVisible(!visible)}>
+              <Button.Content visible> {basketItems.length} </Button.Content>
+              <Button.Content hidden>
+                <Icon name='shop' />
+              </Button.Content>
+            </Button>
+          </Menu.Item>
+
         </Menu.Menu>
+
+        {visible &&
+          <Card style={{ position: 'absolute', zIndex: 2, top: 72, right: '0.5%' }}>
+            <Card.Content>
+              <Card.Header>Menünüz</Card.Header>
+            </Card.Content>
+            <Card.Content>
+              <Feed>
+
+                {basketItems.map((item, index) =>
+                  <Feed.Event key={index}>
+                    <Feed.Label image={item.image === "" ? './foods.png' : item.image} />
+                    <Feed.Content>
+                      <Feed.Date content={item.glycemicindex} />
+                      <Feed.Summary>
+                        {item.name}
+                      </Feed.Summary>
+                    </Feed.Content>
+                    <Feed.Content style={{ textAlign: 'right' }}>
+                      <Button onClick={(e, d) => deleteFnc(index)} size='mini' color='red' >
+                        <Button.Content><Icon name='delete'></Icon></Button.Content>
+                      </Button>
+                    </Feed.Content>
+                  </Feed.Event>
+                )}
+
+
+                <Feed.Event style={{marginTop:20}}>
+                  <FeedContent>
+                    <Label style={{ backgroundColor: '#D8DED8' }} size='big'>Toplam Glisemik İndeksi: {basketItems.reduce((total, item) => total + (item.glycemicindex!), 0)} </Label>
+                  </FeedContent>
+                </Feed.Event>
+
+              </Feed>
+            </Card.Content>
+          </Card>
+        }
+
       </Menu>
 
 

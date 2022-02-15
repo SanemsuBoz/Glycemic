@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js';
+import { IFoods, ResultFoods } from './models/IFoods';
 import { UserResult } from './models/IUser';
 
 export const encryptData = (data: any, salt: string) => {
@@ -68,4 +69,56 @@ export const autControl = () => {
     } else {
         return null;
     }
+}
+
+//basket add
+export const basketAdd=(item:ResultFoods)=>{
+    let arr:ResultFoods[]=[]
+    const oldDataString=localStorage.getItem("basket")
+
+    if(oldDataString){
+        arr=JSON.parse(oldDataString)
+        arr.push(item)
+        const newString=JSON.stringify(arr)
+        localStorage.setItem("basket",newString)
+    }else{
+        arr.push(item)
+        const newString=JSON.stringify(arr)
+        localStorage.setItem("basket",newString)
+    }
+}
+
+//basket all items data and control
+export const allDataBasket=()=>{
+    let arr:ResultFoods[]=[]
+
+    try {
+        const oldDataString=localStorage.getItem("basket")
+        if(oldDataString){
+            arr=JSON.parse(oldDataString)
+        }
+    } catch (error) {
+        localStorage.removeItem("basket")
+    }
+
+    return arr
+}
+
+//basket item delete for index
+export const deleteItemBasket=(index:number)=>{
+    let arr:ResultFoods[]=[]
+
+    try {
+        const oldDataString=localStorage.getItem("basket")
+        if(oldDataString){
+            arr=JSON.parse(oldDataString)
+            arr.splice(index,1)
+            const newString = JSON.stringify( arr )
+            localStorage.setItem("basket", newString)
+        }
+    } catch (error) {
+        localStorage.removeItem("basket")
+    }
+
+    return arr
 }

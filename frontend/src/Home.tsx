@@ -151,8 +151,7 @@ export default function Home() {
 
       <Grid>
         <Pagination
-          activePage={currentPage}
-          //defaultActivePage={currentPage}                  
+          activePage={currentPage}                 
           pointing
           secondary
           totalPages={pageCount}
