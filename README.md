@@ -12,6 +12,7 @@ It is a web page where you can find the glycemic values of foods and add new val
 |Spring Boot|
 |Spring Security|
 |Semantic|
+|TypeScript|
 
 ## Roles
 
