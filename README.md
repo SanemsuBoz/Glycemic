@@ -8,9 +8,21 @@ It is a web page where you can find the glycemic values of foods and add new val
 |------|
 |Java|
 |React JS|
-|H2 Database|
+|Hibernate/JPA|
 |Spring Boot|
 |Spring Security|
+|Semantic|
+
+## Roles
+
+We have 3 types roles. Admin does everything, user adds foods and calculates total glycemic index and global user only calculates total glycemic index.
+
+|Roles|
+|------|
+|Admin|
+|User|
+|Global|
+
 
 ## Images
 
